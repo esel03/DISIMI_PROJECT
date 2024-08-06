@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Opros</title>
+</head>
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+        <p>Тип товара:<br> <input name="type_product" /></p>
+        <p>Название модели товара:<br> <input name="name_model" /></p>
+        <p>Основные функции:<br> <input name="main_func" /></p>
+        <p>Цвет:<br> <input name="color" /></p>
+        <p>Габариты:<br> <input name="dimensions" /></p>
+        <p>Ссылка на товар:<br> <input name="link" /></p>
+        <input type="submit" value="Send" />
+    </form>
+</body>
+</html>

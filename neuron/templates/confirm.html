@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Confirm</title>
+</head>
+<body>
+    <p>{{type_product}}</p>
+    <form method="post" action="create/">
+        {% csrf_token %}
+       <input type="submit" value="Send" />
+    </form>
+</body>
+</html>
