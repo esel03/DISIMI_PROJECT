@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'kcfsrpc-az08=rsq4q1wu&wijonvr5
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['disimiproject.ru']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "disimiproject.ru", "www.disimiproject.ru"]
 
 
 # Application definition
