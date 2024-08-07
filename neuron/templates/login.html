@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Opros</title>
+</head>
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+        <h3>Username:<br> <input name="username" required /></h3>
+        <h3>Email:<br> <input name="email" required /></p>
+        <p>Password:<br> <input name="password" required /></p>
+        <input type="submit" value="Send" />
+    </form>
+</body>
+</html>
