@@ -46,9 +46,11 @@ def registration(request):
                 except User.DoesNotExist:
                     User.objects.create(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
                     new_user = User.objects.get(username=username).id
+                    response = HttpResponsePermanentRedirect('/')
+                    response.set_cookie("id", new_user)
                     os.mkdir(f'neuron/templates/data_json/data_json{new_user}')
                     os.mkdir(f'neuron/templates/result_json/result_json{new_user}')
-                    return HttpResponsePermanentRedirect('/')
+                    return response
                 else:
                     return HttpResponse("Username занят")
             else:
@@ -80,7 +82,10 @@ def login(request):
                 except User.DoesNotExist:
                     return HttpResponse("Во входе отказано Password")
                 else:
-                    return HttpResponsePermanentRedirect('/')
+                    ex_user = User.objects.get(username=username).id
+                    response = HttpResponsePermanentRedirect('/')
+                    response.set_cookie("id", ex_user)
+                    return response
     else:
         return render(request, 'login.html')
 
@@ -96,7 +101,7 @@ def login(request):
 
 
 def short_description(request):
-    id = User.objects.get(username=username).id
+    id = request.COOKIES["id"]
     if request.method == "POST":
         type_product = request.POST.get('type_product')
         #name_model = request.POST.get('name_model')
@@ -115,13 +120,13 @@ def short_description(request):
         return render(request, 'opros.html')
 
 def create(request):
-    id = User.objects.get(username=username).id
+    id = request.COOKIES["id"]
     result_opros = open(f'neuron/templates/data_json/data_json{id}/data{id}.json', 'r')
     temp = json.load(result_opros)
     #Дальше запускается генерация текста по данным пользователя - data{id}.json
     #Пока что приводится имитация работы llama
 
-    text_1 = temp["type_product"] #присваивается значение из data{id}.json
+    text_1 = [temp["type_product"], 'uspex', 'pobeda'] #присваивается значение из data{id}.json
     result_opros.close()
     result_generate = open(f'neuron/templates/result_json/result_json{id}/result{id}.json', 'w')
     json.dump({"text_1": text_1}, result_generate) #помещение результата генерации
