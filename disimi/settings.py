@@ -20,12 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kcfsrpc-az08=rsq4q1wu&wijonvr5iej87jz7v!c*p%ubv+w7'
+#SECRET_KEY = 'django-insecure-kcfsrpc-az08=rsq4q1wu&wijonvr5iej87jz7v!c*p%ubv+w7'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'kcfsrpc-az08=rsq4q1wu&wijonvr5iej87jz7v!c*p%ubv+w7')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['disimiproject.ru']
 
 
 # Application definition
@@ -124,14 +126,14 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
+"""
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
         "LOCATION": os.path.join(BASE_DIR, 'disimi_cache'),
     }
 }
-
+"""
 
 
 

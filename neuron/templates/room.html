@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Room</title>
+</head>
+<body>
+    <h3>ROOM</h3>
+    <!--  -->
+    {% for element in lang %}
+        <li><a href="http://127.0.0.1:8000/create/{{id_user}}/{{element.id}}">Result Add {{element.data_create}}</a></li>
+    {% endfor %}
+
+    <div>
+    <a href="http://127.0.0.1:8000/room/exit/">Exit account</a>
+    </div>
+    <p>End!</p>
+    
+</body>
+</html>

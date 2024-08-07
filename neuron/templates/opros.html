@@ -8,11 +8,12 @@
     <form method="post" action="">
         {% csrf_token %}
         <p>Тип товара:<br> <input name="type_product" /></p>
-        <p>Название модели товара:<br> <input name="name_model" /></p>
-        <p>Основные функции:<br> <input name="main_func" /></p>
-        <p>Цвет:<br> <input name="color" /></p>
-        <p>Габариты:<br> <input name="dimensions" /></p>
-        <p>Ссылка на товар:<br> <input name="link" /></p>
+        
+        {% if error == 1%}
+        <p>Такое название у вас уже имеется</p>
+        {% else %}
+            <p></p>
+        {% endif %}
         <input type="submit" value="Send" />
     </form>
 </body>
