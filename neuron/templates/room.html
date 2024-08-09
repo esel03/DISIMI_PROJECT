@@ -1,4 +1,131 @@
 <!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box; /* Для учета отступов в ширине */
+        }
+
+        .image-top-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 10px; /* Отступ для отдаления от края */
+        }
+
+        .image-top-left img {
+            max-width: 60px; /* Максимальная ширина */
+            max-height: 60px; /* Максимальная высота */
+            border-radius: 8px; /* Закругленные углы */
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Легкая тень для объема */
+        }
+
+        h3 {
+            font-size: 28px; /* Увеличен для лучшего просмотра */
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%; /* Устанавливаем ширину списка на 100% */
+            max-width: 600px; /* Максимальная ширина списка */
+            margin: 0 auto; /* Центрируем список */
+        }
+
+        li {
+            margin-bottom: 15px; /* Увеличены отступы между элементами списка */
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 18px; /* Увеличен размер шрифта */
+            transition: color 0.3s ease;
+            display: block; /* Чтобы ссылка занимала всю ширину родительского элемента */
+            padding: 10px; /* Добавлены отступы для удобства нажатия */
+            border-radius: 5px; /* Скругленные углы для улучшения визуала */
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .exit-link {
+            margin-top: 20px;
+            text-align: center; /* Центрируем ссылку выхода */
+        }
+
+        p {
+            margin-top: 40px;
+            font-size: 16px; /* Увеличен размер шрифта */
+            color: #666;
+            text-align: center; /* Центрируем текст */
+        }
+
+        @media (max-width: 600px) {
+            h3 {
+                font-size: 24px; /* Уменьшаем размер заголовка для маленьких экранов */
+            }
+
+            a {
+                font-size: 16px; /* Уменьшаем размер шрифта ссылок */
+            }
+
+            p {
+                font-size: 14px; /* Уменьшаем размер шрифта для параграфа */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-top-left">
+        <img src="{% static 'images/art.jpeg' %}" alt="Art Image">
+    </div>
+    <h3>ROOM</h3>
+
+    <ul>
+        {% for element in lang %}
+        <li><a href="http://81.94.159.44:8000/create/{{id_user}}/{{element.id}}">Result Add {{element.data_create}}</a></li>
+        {% endfor %}
+    </ul>
+
+    {% if id_user != 0 %}
+    <div class="exit-link">
+        <a href="exit/">Exit account</a>
+    </div>
+    {% endif %}
+
+    <div class="exit-link">
+        <a href="http://81.94.159.44:8000/">Back!</a>
+    </div>
+
+    <p>End!</p>
+</body>
+
+</html>
+
+
+
+<!--
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -62,7 +189,7 @@
 
     <ul>
         {% for element in lang %}
-        <li><a href="http://81.94.159.44:8000/create/{{id_user}}/{{element.id}}">Result Add {{element.data_create}}</a></li>
+        <li><a href="http://127.0.0.1:8000/create/{{id_user}}/{{element.id}}">Result Add {{element.data_create}}</a></li>
         {% endfor %}
     </ul>
     {% if id_user != 0 %}
@@ -74,10 +201,12 @@
     {% endif %}
 
     <div class="exit-link">
-        <a href="http://81.94.159.44:8000/">Back!</a>
+        <a href="http://127.0.0.1:8000/">Back!</a>
     </div>
     
     <p>End!</p>
 </body>
 
 </html>
+
+-->

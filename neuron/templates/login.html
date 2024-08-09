@@ -1,4 +1,132 @@
 <!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Светло-голубой фон */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #ffffff; /* Белый фон формы */
+            padding: 20px; /* Уменьшены отступы, чтобы форма занимала меньше места */
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
+            max-width: 90%; /* Ширина формы адаптирована для мобильных устройств */
+            width: 400px; /* Максимальная ширина формы */
+            text-align: left;
+        }
+
+        .image-top-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 10px; /* Отступ для отдаления от края */
+        }
+
+        .image-top-left img {
+            max-width: 60px; /* Максимальная ширина */
+            max-height: 60px; /* Максимальная высота */
+            border-radius: 8px; /* Закругленные углы */
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Легкая тень для объема */
+        }
+
+        h3, p {
+            margin-bottom: 15px; /* Увеличенные отступы между элементами */
+            font-size: 18px; /* Увеличение размера шрифта */
+            color: #333; /* Темный цвет текста для лучшего контраста */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px; /* Увеличение отступов внутри полей */
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px; /* Увеличение размера шрифта в полях ввода */
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF; /* Синий фон кнопки */
+            color: white; /* Белый цвет текста кнопки */
+            border: none;
+            padding: 15px; /* Увеличение отступов для кнопки */
+            font-size: 18px; /* Увеличение размера шрифта на кнопке */
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%; /* Кнопка растягивается на всю ширину контейнера */
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Темнее синий цвет при наведении */
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 15px; /* Уменьшение отступов на маленьких экранах */
+                width: 95%; /* Ширина формы на маленьких экранах */
+            }
+
+            h3, p {
+                font-size: 16px; /* Уменьшение размера шрифта на маленьких экранах */
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+                font-size: 14px; /* Уменьшение размера шрифта в полях ввода на маленьких экранах */
+            }
+
+            input[type="submit"] {
+                padding: 12px; /* Уменьшение отступов для кнопки на маленьких экранах */
+                font-size: 16px; /* Уменьшение размера шрифта на кнопке */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-top-left">
+        <img src="{% static 'images/art.jpeg' %}" alt="Art Image">
+    </div>
+    <div class="form-container">
+        <form method="post" action="">
+            {% csrf_token %}
+            <h3>Username:</h3>
+            <input type="text" name="username" required />
+            
+            <h3>Email:</h3>
+            <input type="email" name="email" required />
+            
+            <p>Password:</p>
+            <input type="password" name="password" required />
+            
+            <input type="submit" value="Send" />
+        </form>
+    </div>
+</body>
+
+</html>
+
+
+
+<!--
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -87,3 +215,5 @@
 </body>
 
 </html>
+
+-->

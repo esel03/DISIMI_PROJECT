@@ -23,8 +23,11 @@ def main(request):
         return render(request, 'main.html', context={"user": 0})
     else:
         id_user = request.COOKIES["id"]
-        username = User.objects.get(id=id_user).username
-        return render(request, 'main.html', context={"user": int(id_user), "username": username})
+        if int(id_user) == 0:
+            return render(request, 'main.html', context={"user": int(id_user)})
+        else:
+            username = User.objects.get(id=id_user).username
+            return render(request, 'main.html', context={"user": int(id_user), "username": username})
 
 
 

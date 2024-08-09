@@ -1,4 +1,108 @@
 <!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Светло-голубой фон */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .confirm-container {
+            background-color: #ffffff; /* Белый фон контейнера */
+            padding: 40px; /* Увеличение отступов */
+            border-radius: 12px; /* Увеличение радиуса скругления */
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
+            text-align: center;
+            max-width: 500px; /* Увеличение максимальной ширины */
+            width: 90%; /* Ширина контейнера для лучшего отображения на мобильных устройствах */
+        }
+
+        p {
+            font-size: 24px; /* Увеличение размера шрифта */
+            color: #333; /* Темный цвет текста для лучшего контраста */
+            margin-bottom: 30px; /* Увеличение отступа снизу */
+            word-wrap: break-word;
+        }
+
+        .image-top-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 10px; /* Отступ для отдаления от края */
+        }
+
+        .image-top-left img {
+            max-width: 60px; /* Максимальная ширина */
+            max-height: 60px; /* Максимальная высота */
+            border-radius: 8px; /* Закругленные углы */
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Легкая тень для объема */
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF; /* Синий фон кнопки */
+            color: #ffffff; /* Белый цвет текста кнопки */
+            border: none;
+            padding: 15px 30px; /* Увеличение отступов для кнопки */
+            font-size: 18px; /* Увеличение размера шрифта на кнопке */
+            border-radius: 8px; /* Увеличение радиуса скругления кнопки */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Темнее синий цвет при наведении */
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .confirm-container {
+                padding: 20px; /* Уменьшение отступов на маленьких экранах */
+                max-width: 90%; /* Ширина контейнера на маленьких экранах */
+            }
+
+            p {
+                font-size: 20px; /* Уменьшение размера шрифта на маленьких экранах */
+                margin-bottom: 20px; /* Уменьшение отступа снизу на маленьких экранах */
+            }
+
+            input[type="submit"] {
+                padding: 12px 20px; /* Уменьшение отступов на кнопке */
+                font-size: 16px; /* Уменьшение размера шрифта на кнопке */
+                border-radius: 6px; /* Уменьшение радиуса скругления кнопки */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-top-left">
+        <img src="{% static 'images/art.jpeg' %}" alt="Art Image">
+    </div>
+    <div class="confirm-container">
+        <p>{{name}}</p>
+        <form method="post" action="create/">
+            {% csrf_token %}
+            <input type="submit" value="Send" />
+        </form>
+    </div>
+</body>
+
+</html>
+
+
+<!--
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -62,3 +166,4 @@
 </body>
 
 </html>
+-->

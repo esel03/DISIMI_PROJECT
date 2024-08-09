@@ -1,4 +1,75 @@
 <!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .image-top-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 10px; /* Отступ для отдаления от края */
+        }
+
+        .image-top-left img {
+            max-width: 60px; /* Максимальная ширина */
+            max-height: 60px; /* Максимальная высота */
+            border-radius: 8px; /* Закругленные углы */
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Легкая тень для объема */
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007BFF;
+            padding: 15px 25px;
+            font-size: 30px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block; /* Ensure it respects padding and text size */
+        }
+
+        a:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            a {
+                padding: 12px 20px; /* Adjust padding for smaller screens */
+                font-size: 16px; /* Adjust font size for smaller screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-top-left">
+        <img src="{% static 'images/art.jpeg' %}" alt="Art Image">
+    </div>
+    <a href="http://81.94.159.44:8000/create/{{id_user}}/{{id_depend}}">Link</a>
+</body>
+
+</html>
+
+
+<!--
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -36,7 +107,8 @@
 </head>
 
 <body>
-    <a href="http://81.94.159.44:8000/create/{{id_user}}/{{id_depend}}">Link</a>
+    <a href="http://127.0.0.1:8000/create/{{id_user}}/{{id_depend}}">Link</a>
 </body>
 
 </html>
+-->

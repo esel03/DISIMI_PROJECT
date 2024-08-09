@@ -1,4 +1,134 @@
 <!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .form-container p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .image-top-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 10px; /* Отступ для отдаления от края */
+        }
+
+        .image-top-left img {
+            max-width: 60px; /* Максимальная ширина */
+            max-height: 60px; /* Максимальная высота */
+            border-radius: 8px; /* Закругленные углы */
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Легкая тень для объема */
+        }
+
+        input[name="name"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 15px;
+                width: 95%;
+                max-width: none;
+            }
+
+            .form-container p {
+                font-size: 16px;
+            }
+
+            input[name="name"] {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            input[type="submit"] {
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-top-left">
+        <img src="{% static 'images/art.jpeg' %}" alt="Art Image">
+    </div>
+    <div class="form-container">
+        <form method="post" action="">
+            {% csrf_token %}
+            <p>Тип товара:<br> 
+                <input name="name" placeholder="Введите уникальное новое слово" />
+            </p>
+
+            {% if error == 1 %}
+            <p class="error-message">Такое название у вас уже имеется</p>
+            {% endif %}
+
+            <input type="submit" value="Send" />
+        </form>
+    </div>
+</body>
+
+</html>
+
+
+<!--
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -81,3 +211,5 @@
 </body>
 
 </html>
+
+-->
