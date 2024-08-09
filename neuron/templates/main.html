@@ -53,13 +53,17 @@
         <a href="registration/">Registration</a>
         <a href="view_login/">Login</a>
         <a href="room/">Room</a>
-
+{% if user == True%}
         {% if user != 0 %}
         <a href="short_description/">Create add</a>
         {% else %}
         <a href="/">Create add</a>
         {% endif %}
+{% else %}
+        <a href="/">Create add</a>
+{% endif %}
     </div>
+}
 </body>
 
 </html>
