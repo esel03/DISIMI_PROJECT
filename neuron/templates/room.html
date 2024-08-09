@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #e0f7fa;
             margin: 0;
             padding: 0;
             display: flex;
@@ -65,9 +65,16 @@
         <li><a href="http://81.94.159.44:8000/create/{{id_user}}/{{element.id}}">Result Add {{element.data_create}}</a></li>
         {% endfor %}
     </ul>
-
+    {% if id_user != 0 %}
     <div class="exit-link">
         <a href="exit/">Exit account</a>
+    </div>
+    {% else %}
+
+    {% endif %}
+
+    <div class="exit-link">
+        <a href="http://81.94.159.44:8000/">Back!</a>
     </div>
     
     <p>End!</p>

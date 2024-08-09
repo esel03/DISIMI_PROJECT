@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #e0f7fa;
             margin: 0;
             padding: 0;
             display: flex;
@@ -49,3 +49,75 @@
 </body>
 
 </html>
+
+
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000; /* Черный фон */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Прячем полосы прокрутки */
+            position: relative;
+        }
+
+        .result-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Легкая тень для контейнера */
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            z-index: 1; /* Чтобы текст был поверх линий */
+        }
+
+        p {
+            font-size: 24px;
+            color: #333;
+            margin: 0;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        p::before {
+            content: "Result: ";
+            font-weight: bold;
+            color: #FF5722; /* Ярко-оранжевый цвет для заголовка */
+        }
+
+        /* Псевдоэлемент для создания плавных линий */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 0, 0, 0.5) 25%, transparent 25%, transparent 50%, rgba(255, 0, 0, 0.5) 50%, rgba(255, 0, 0, 0.5) 75%, transparent 75%, transparent);
+            background-size: 50px 50px; /* Размеры повторения линий */
+            z-index: 0; /* Сзади контейнера с результатом */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result-container">
+        <p>{{ result_first_gen }}</p>
+    </div>
+</body>
+
+</html>
+-->

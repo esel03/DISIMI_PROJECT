@@ -23,7 +23,9 @@ def main(request):
         return render(request, 'main.html', context={"user": 0})
     else:
         id_user = request.COOKIES["id"]
-        return render(request, 'main.html', context={"user": id_user})
+        username = User.objects.get(id=id_user).username
+        return render(request, 'main.html', context={"user": int(id_user), "username": username})
+
 
 
 def registration(request):
@@ -130,8 +132,11 @@ def exit(request):
 
 def room(request):
     id_user = request.COOKIES["id"]
-    local_var = Depend.objects.filter(depend_field_id=id_user, views_count=1)
-    return render(request, 'room.html', context={"id_user": id_user, "lang": list(local_var)})
+    if int(id_user) == 0:
+        return render(request, 'room.html', context={"id_user": 0})
+    else:
+        local_var = Depend.objects.filter(depend_field_id=id_user, views_count=1)
+        return render(request, 'room.html', context={"id_user": id_user, "lang": list(local_var)})
 
 
 
@@ -141,27 +146,29 @@ def room(request):
 
 
 def short_description(request):
-    id_user = request.COOKIES["id"]
-    if request.method == "POST":
-        name = request.POST.get('name')
-        
-        try:
-            Depend.objects.get(depend_field_id=id_user, title=name)
-        except Depend.DoesNotExist:
-            Depend.objects.create(depend_field_id=id_user, title=name, data_create=datetime.datetime.now())
-            id_depend = Depend.objects.get(depend_field_id=id_user, title=name).id
-            result_opros = open(f'neuron/templates/data_json/data_json{id_user}/data{id_depend}.json', 'w')
-            data = {"name": name} # "name_model": name_model, "main_func": main_func, "color": color, "dimensions": dimensions, "link": link
-
-            json.dump(data, result_opros, ensure_ascii=False)
-            result_opros.close()
-            response = HttpResponsePermanentRedirect('/short_description/confirm')
-            response.set_cookie("name", name, samesite=None)
-            return response
-        else:
-            return render(request, 'opros.html', context={"error": 1})
+    if int(request.COOKIES["id"]) == 0:
+        return HttpResponseRedirect('/')
     else:
-        return render(request, 'opros.html', context={"error": 0})
+        id_user = request.COOKIES["id"]
+        if request.method == "POST":
+            name = request.POST.get('name')
+            try:
+                Depend.objects.get(depend_field_id=id_user, title=name)
+            except Depend.DoesNotExist:
+                Depend.objects.create(depend_field_id=id_user, title=name, data_create=datetime.datetime.now())
+                id_depend = Depend.objects.get(depend_field_id=id_user, title=name).id
+                result_opros = open(f'neuron/templates/data_json/data_json{id_user}/data{id_depend}.json', 'w')
+                data = {"name": name} # "name_model": name_model, "main_func": main_func, "color": color, "dimensions": dimensions, "link": link
+
+                json.dump(data, result_opros, ensure_ascii=False)
+                result_opros.close()
+                response = HttpResponsePermanentRedirect('/short_description/confirm')
+                response.set_cookie("name", name, samesite=None)
+                return response
+            else:
+                return render(request, 'opros.html', context={"error": 1})
+        else:
+            return render(request, 'opros.html', context={"error": 0})
 
 
 def confirm(request):

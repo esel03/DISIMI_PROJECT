@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'kcfsrpc-az08=rsq4q1wu&wijonvr5iej87jz7v!c*p%ubv+w7')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['81.94.159.44' ,'www.disimi.ru', 'disimi.ru']

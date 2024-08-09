@@ -3,64 +3,103 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #e0f7fa; /* Светло-голубой фон */
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             height: 100vh;
+            position: relative; /* Ensure .header is positioned correctly */
+        }
+
+        .header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #00796b; /* Цвет ссылок в заголовке */
+            font-size: 18px;
+            margin-left: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .header a:hover {
+            color: #004d40; /* Цвет ссылок при наведении */
         }
 
         .container {
-            text-align: center;
-            background-color: #ffffff;
-            padding: 100px;
+            background-color: #ffffff; /* Белый фон контейнера */
+            padding: 50px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            margin-top: 100px; /* Space for header */
         }
 
-        a {
+        .main-links {
+            margin-top: 20px;
+        }
+
+        .main-links a {
             text-decoration: none;
-            color: #007BFF;
-            font-size: 35px;
+            color: #004d40; /* Цвет ссылок в основном блоке */
+            font-size: 30px;
             margin: 10px 0;
             display: block;
             transition: color 0.3s ease;
         }
 
-        a:hover {
-            color: #0056b3;
+        .main-links a:hover {
+            color: #00796b; /* Цвет ссылок при наведении */
         }
 
-        .container a:first-child {
-            margin-top: 0;
-        }
+        @media (max-width: 600px) {
+            .header a {
+                font-size: 16px;
+                margin-left: 10px;
+            }
 
-        .container a:last-child {
-            margin-bottom: 0;
+            .main-links a {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="header">
+        {% if user != 0 %}
+        <span>{{ username }}</span> <!-- Отображение имени пользователя -->
+        <a href="room/">Logout</a>
+        {% else %}
+
         <a href="registration/">Registration</a>
         <a href="view_login/">Login</a>
-        <a href="room/">Room</a>
-
-        {% if user != 0 %}
-        <a href="short_description/">Create add</a>
-        {% else %}
-        <a href="/">Create add</a>
         {% endif %}
     </div>
 
+    <div class="container">
+        <div class="main-links">
+            <!-- <a href="room/">Room</a> -->
+
+            {% if user != 0 %}
+            <a href="short_description/">Create add</a>
+            {% else %}
+            <a href="/">Create add</a>
+            {% endif %}
+        </div>
+    </div>
 </body>
 
 </html>
