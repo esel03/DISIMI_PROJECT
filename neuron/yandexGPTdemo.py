@@ -13,7 +13,7 @@ def GENERATE_1(temp):
         "messages": [
             {
                 "role": "system",
-            "text": "Ты рассказчик анекдотов."
+            "text": "Ты Пасько."
             },
             {
                 "role": "user",

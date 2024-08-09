@@ -127,7 +127,7 @@ def exit(request):
 
 def room(request):
     id_user = request.COOKIES["id"]
-    local_var = Depend.objects.filter(depend_field_id=id_user)
+    local_var = Depend.objects.filter(depend_field_id=id_user, views_count=1)
     return render(request, 'room.html', context={"id_user": id_user, "lang": list(local_var)})
 
 

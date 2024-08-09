@@ -1,21 +1,76 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <title>Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .exit-link {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        p {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
+
 <body>
     <h3>ROOM</h3>
-    <!--  -->
-    {% for element in lang %}
-        <li><a href="http://127.0.0.1:8000/create/{{id_user}}/{{element.id}}">Result Add {{element.data_create}}</a></li>
-    {% endfor %}
 
-    <div>
-    <a href="exit/">Exit account</a>
+    <ul>
+        {% for element in lang %}
+        <li><a href="http://127.0.0.1:8000/create/{{id_user}}/{{element.id}}">Result Add {{element.data_create}}</a></li>
+        {% endfor %}
+    </ul>
+
+    <div class="exit-link">
+        <a href="exit/">Exit account</a>
     </div>
-    <p>End!</p>
     
+    <p>End!</p>
 </body>
+
 </html>
