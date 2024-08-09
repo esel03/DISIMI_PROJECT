@@ -17,10 +17,13 @@ import json
 
 
 def main(request):
-    id_user = request.COOKIES["id"]
-    print(id_user)
-    return render(request, 'main.html', context={"user": id_user})
-
+    try:
+        request.COOKIES["id"]
+    except KeyError:
+        return render(request, 'main.html', context={"user": 0})
+    else:
+        id_user = request.COOKIES["id"]
+        return render(request, 'main.html', context={"user": id_user})
 
 
 def registration(request):
