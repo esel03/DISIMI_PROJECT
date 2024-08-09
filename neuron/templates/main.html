@@ -7,20 +7,31 @@
 </head>
 <body>
     <div>
-    <a href="http://81.94.159.44:8000/registration/">Registration</a>
+    <a href="registration/">Registration</a>
     </div>
+    
     <div>
-    <a href="http://81.94.159.44:8000/short_description/">Create add</a>
+    <a href="view_login/">Login</a>
     </div>
+
     <div>
-    <a href="http://81.94.159.44:8000/login/">Login</a>
+    <a href="room/">Room</a>
     </div>
 
     
-
+    {% if user != 0 %}
     <div>
-    <a href="http://81.94.159.44:8000/room/">Room</a>
+    <a href="short_description/">Create add</a>
     </div>
+
+    
+    {% else %}
+    <div>
+    <a href="/">Create add</a>
+    </div>
+
+    
+    {% endif %}
     <!-- <a href="http://127.0.0.1:8000/generate/create/{{link}}">Link</a> -->
     
 </body>

@@ -7,7 +7,7 @@
 <body>
     <form method="post" action="">
         {% csrf_token %}
-        <p>Тип товара:<br> <input name="type_product" /></p>
+        <p>Тип товара:<br> <input name="name" /></p>
         
         {% if error == 1%}
         <p>Такое название у вас уже имеется</p>

@@ -1,5 +1,8 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponsePermanentRedirect, HttpResponseRedirect
+from .yandexGPTdemo import GENERATE_1
+from .process import PROCESS
 from django.contrib.auth.models import User
 from .models import Depend
 
@@ -14,7 +17,11 @@ import json
 
 
 def main(request):
-    return render(request, 'main.html')
+    id_user = request.COOKIES["id"]
+    print(id_user)
+    return render(request, 'main.html', context={"user": id_user})
+
+
 
 def registration(request):
     if request.method == "POST":
@@ -34,7 +41,7 @@ def registration(request):
                 except User.DoesNotExist:
                     User.objects.create(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
                     new_user = User.objects.get(username=username).id
-                    response = HttpResponsePermanentRedirect('/')
+                    response = HttpResponseRedirect('/')
                     response.set_cookie("id", new_user, samesite=None)
                     os.mkdir(f'neuron/templates/data_json/data_json{new_user}')
                     os.mkdir(f'neuron/templates/result_json/result_json{new_user}')
@@ -47,9 +54,32 @@ def registration(request):
             return HttpResponse("<h1>Пароли не совпали</h1>")
     else:
         return render(request, 'registration.html')
+'''
+def view_login(request):
+    if request.method == "POST":
+        #user = User.objects.all()
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, username=username, email=email, password=password)
+        print(user)
+        if user is not None:
+            #login(request, user)
+            user_id = User.objects.get(username=username).id
+            response = HttpResponseRedirect('/')
+            response.set_cookie("id", user_id, samesite=None)
+            return response
+        else:
+            return HttpResponse("Во входе отказано Username")
+    else:
+        return render(request, 'login.html')
+'''
 
 
-def login(request):
+
+
+
+def view_login(request):
     if request.method == "POST":
         user = User.objects.all()
         username = request.POST.get('username')
@@ -71,7 +101,7 @@ def login(request):
                     return HttpResponse("Во входе отказано Password")
                 else:
                     ex_user = User.objects.get(username=username).id
-                    response = HttpResponsePermanentRedirect('/')
+                    response = HttpResponseRedirect('/')
                     response.set_cookie("id", ex_user, samesite=None)
                     return response
     else:
@@ -103,27 +133,27 @@ def room(request):
 
 
 
-#Depend.objects.create(depend_field_id=7, title='type_product', views_count=1, data_create=datetime.datetime.now())
+#Depend.objects.create(depend_field_id=7, title='name', views_count=1, data_create=datetime.datetime.now())
 
 
 
 def short_description(request):
     id_user = request.COOKIES["id"]
     if request.method == "POST":
-        type_product = request.POST.get('type_product')
+        name = request.POST.get('name')
         
         try:
-            Depend.objects.get(depend_field_id=id_user, title=type_product)
+            Depend.objects.get(depend_field_id=id_user, title=name)
         except Depend.DoesNotExist:
-            Depend.objects.create(depend_field_id=id_user, title=type_product, views_count=1, data_create=datetime.datetime.now())
-            id_depend = Depend.objects.get(depend_field_id=id_user, title=type_product).id
+            Depend.objects.create(depend_field_id=id_user, title=name, data_create=datetime.datetime.now())
+            id_depend = Depend.objects.get(depend_field_id=id_user, title=name).id
             result_opros = open(f'neuron/templates/data_json/data_json{id_user}/data{id_depend}.json', 'w')
-            data = {"type_product": type_product} # "name_model": name_model, "main_func": main_func, "color": color, "dimensions": dimensions, "link": link
+            data = {"name": name} # "name_model": name_model, "main_func": main_func, "color": color, "dimensions": dimensions, "link": link
 
-            json.dump(data, result_opros)
+            json.dump(data, result_opros, ensure_ascii=False)
             result_opros.close()
             response = HttpResponsePermanentRedirect('/short_description/confirm')
-            response.set_cookie("type_product", type_product, samesite=None)
+            response.set_cookie("name", name, samesite=None)
             return response
         else:
             return render(request, 'opros.html', context={"error": 1})
@@ -133,8 +163,8 @@ def short_description(request):
 
 def confirm(request):
     id_user = request.COOKIES["id"]
-    type_product = request.COOKIES["type_product"]
-    id_depend = Depend.objects.get(depend_field_id=id_user, title=type_product).id
+    name = request.COOKIES["name"]
+    id_depend = Depend.objects.get(depend_field_id=id_user, title=name).id
 
     result_opros = open(f'neuron/templates/data_json/data_json{id_user}/data{id_depend}.json', 'r')
     temp = json.load(result_opros)
@@ -147,19 +177,20 @@ def confirm(request):
 
 def create(request):
     id_user = request.COOKIES["id"]
-    type_product = request.COOKIES["type_product"]
-    id_depend = Depend.objects.get(depend_field_id=id_user, title=type_product).id
+    name = request.COOKIES["name"]
+    id_depend = Depend.objects.get(depend_field_id=id_user, title=name).id
     result_opros = open(f'neuron/templates/data_json/data_json{id_user}/data{id_depend}.json', 'r')
     temp = json.load(result_opros)
     #Дальше запускается генерация текста по данным пользователя - data{id}.json
     #Пока что приводится имитация работы llama
 
-    text_1 = [temp["type_product"], 'uspex', 'pobeda'] #присваивается значение из data{id}.json
+    first_gen = GENERATE_1(temp) #присваивается значение из data{id}.json
+    result_first_gen = PROCESS(id_user, id_depend, first_gen)
     result_opros.close()
     result_generate = open(f'neuron/templates/result_json/result_json{id_user}/result{id_depend}.json', 'w')
-    json.dump({"text_1": text_1}, result_generate) #помещение результата генерации
+    json.dump({"result_first_gen": result_first_gen}, result_generate, ensure_ascii=False) #помещение результата генерации
     result_generate.close()
-    #link = id
+    Depend.objects.filter(depend_field_id=id_user).update(views_count=True)
 
     return render(request, 'preview.html', context={"id_user": id_user, "id_depend": id_depend})
 
